@@ -33,7 +33,7 @@
         <div class="card {{ stat[2] }}">
             <div class="card-content white-text">
                 <span class="card-title">{{ stat[0] }}</span>
-                <p>{{ stat[1] }}</p>
+                <p>{{ stat[1] | safe }}</p>
             </div>
         </div>
     </div>

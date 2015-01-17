@@ -30,7 +30,7 @@ def user():
             ("Swear words", stats.foul_words_stats(), "red darken-4"),
             ("Sentences spoken", stats.general_stats_total_sentences(), "blue darken-4"),
             ("Markov chain", stats.markov_chains(), "orange darken-4"),
-            ("Most common word", stats.most_common_word(), "yellow darken-4"),
+            ("Most common words", stats.most_common_word(), "yellow darken-4"),
             ("Most common time", stats.most_common_time(), "purple darken-4"),
             ("Markov chain", stats.markov_chains(), "green darken-4"),
     )
