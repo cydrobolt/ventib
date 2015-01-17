@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, request, flash, session
-from web.utils import auth
+from web.utils import auth, core_stats
 from web.database import *
 import time
 
@@ -21,9 +21,19 @@ def login():
 
 def user():
     user = User.get(User.username == session["username"])
-    return render_template("user.html", user=user, texts=user.texts)
+    stats = core_stats.CoreStats(user.texts, user.timezone)
+    stat_functions = (
+            ("Swear words", stats.foul_words_stats(), "red darken-4"),
+            ("Sentences spoken", stats.general_stats_total_sentences(), "blue darken-4"),
+            ("Markov chain", stats.markov_chains(), "orange darken-4"),
+            ("Most common word", stats.most_common_word(), "yellow darken-4"),
+            ("Most common time", stats.most_common_time(), "purple darken-4"),
+            ("Markov chain", stats.markov_chains(), "green darken-4"),
+    )
+    return render_template("user.html", stats=stat_functions, user=user)
 
 def new_text():
     user = User.get(User.api_key == request.form["key"])
     Text.create(user=user, text=request.form["text"], time=time.time(), location=request.form["location"])
     return 'ign: 420/69 would add new text again'
+

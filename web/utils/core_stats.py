@@ -1,5 +1,7 @@
 # Ventrib Core Statistic Generator
 import time
+import pykov
+import random
 
 foul_words = list(map(str.strip, open("badwords.txt").read().splitlines()))
 
@@ -50,5 +52,50 @@ class CoreStats:
             factoid = "This user seems to use the most foul language in the {}, with {} sentences containing foul language".format(foul_tod, maxfoul)
         else:
             factoid = "Hmm. This user doesn't seem to use much foul language, with only {} instances during the past day.".format(foul_words_num)
-
         return factoid
+
+    def general_stats_total_sentences(self):
+        l = len(list(filter(lambda k: k.time > (time.time() - 86400), self.data_array)))
+        if l < 20:
+            return "This user doesn't say much, with only %d sentences in the last 24 hours." % l
+        return "This user said %d sentences in the last 24 hours." % l
+
+    def markov_chains(self):
+        data = {}
+        for i in list(filter(lambda k: k.time > (time.time() - 86400), self.data_array)):
+            s = i.text.split()
+            for idx, j in enumerate(s):
+                if idx == len(s) - 1:
+                    break
+                if j not in data:
+                    data[j] = []
+                data[j].append(s[idx + 1])
+        print(data)
+        start = random.choice(list(data.keys()))
+        sentence = [start]
+        while len(sentence) < 40:
+            if start not in data:
+                break
+            start = random.choice(data[start])
+            sentence.append(start)
+        return " ".join(sentence)
+
+    def most_common_word(self):
+        words = sum([i.text.split() for i in list(filter(lambda k: k.time > (time.time() - 86400), self.data_array))], [])
+        d = {}
+        for word in words:
+            if word not in d:
+                d[word] = 0
+            d[word] += 1
+        data = [(i[1], i[0]) for i in d.items()]
+        return "This user's most common word is '%s'." % max(data)[1]
+
+    def most_common_time(self):
+        d = {}
+        for i in self.data_array:
+            t = self.time_of_day(i.time)
+            if t not in d:
+                d[t] = 0
+            d[t] += 1
+        data = [(i[1], i[0]) for i in d.items()]
+        return "This user tends to talk a lot during the %s." % max(data)[1]

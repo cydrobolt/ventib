@@ -19,5 +19,13 @@ add_routes([
     ('/420/blazeit/', user.new_text)
 ])
 
+def chunks(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i+n]
+
+@app.context_processor
+def inject():
+    return dict(chunks=chunks)
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

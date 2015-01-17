@@ -1,8 +1,19 @@
 {% extends 'navbar.html' %}
 {% block content %}
 <h2>Hello, {{ user.username }}</h2>
-<h3>Texts</h3>
-{% for text in texts %}
-{{ text.text }}<br />
+<h3>Stats</h3>
+{% for i in chunks(stats, 4) %}
+<div class="row">
+    {% for stat in i %}
+    <div class="col s12 m3">
+        <div class="card small {{ stat[2] }}">
+            <div class="card-content white-text">
+                <span class="card-title">{{ stat[0] }}</span>
+                <p>{{ stat[1] }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endfor %}
 {% endblock %}
