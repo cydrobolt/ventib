@@ -9,6 +9,7 @@ class BaseModel(Model):
 class User(BaseModel):
     username = CharField()
     password = CharField()
+    api_key = CharField()
 
 class Text(BaseModel):
     text = TextField()
