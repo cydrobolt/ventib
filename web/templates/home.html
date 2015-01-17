@@ -5,6 +5,10 @@
 <p class="grey-text">Ventib has the capability of parsing your speech and generating valuable factoid statistics based on environmental factors and transcribed logs.
 It also provides a search function, allowing users to sift through their past thoughts with ease. </p>
 <br />
-<div class="row"><a class="btn blue lighten-1 col s8 offset-s2" href="/register_login">Get Started</a></div>
+{% if not session["username"] %}
+    <div class="row"><a class="btn blue lighten-1 col s8 offset-s2" href="/register_login">Get Started</a></div>
+{% else %}
+    <div class="row"><a class="btn orange darken-1 col s8 offset-s2" href="/user">Go to your Dashboard</a></div>
+{% endif %}
 
 {% endblock %}
