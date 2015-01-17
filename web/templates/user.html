@@ -1,4 +1,8 @@
 {% extends 'navbar.html' %}
 {% block content %}
-<h1>Hello, {{ user.api_key }}</h1>
+<h2>Hello, {{ user.username }}</h2>
+<h3>Texts</h3>
+{% for text in texts %}
+{{ text.text }}<br />
+{% endfor %}
 {% endblock %}

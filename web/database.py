@@ -10,6 +10,7 @@ class User(BaseModel):
     username = CharField()
     password = CharField()
     api_key = CharField()
+    timezone = IntegerField(default=-5)
 
 class Text(BaseModel):
     text = TextField()

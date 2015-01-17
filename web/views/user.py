@@ -1,5 +1,7 @@
 from flask import render_template, redirect, url_for, request, flash, session
 from web.utils import auth
+from web.database import *
+import time
 
 def register_login():
     return render_template("register_login.html")
@@ -19,4 +21,9 @@ def login():
 
 def user():
     user = User.get(User.username == session["username"])
-    return render_template("user.html", user=user)
+    return render_template("user.html", user=user, texts=user.texts)
+
+def new_text():
+    user = User.get(User.api_key == request.form["key"])
+    Text.create(user=user, text=request.form["text"], time=time.time(), location=request.form["location"])
+    return 'ign: 420/69 would add new text again'
