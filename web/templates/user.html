@@ -2,12 +2,34 @@
 {% set thispage='dashboard' %}
 {% block content %}
 <h2>Hello, {{ user.username }}</h2>
+<h3>Text</h3>
+<script>
+    function search() {
+        var term = $("#search").val();
+        $.getJSON('/api/search/', {q: term}, function(data) {
+                $("#search-result").html(data.texts.join("<br />"));
+                })
+    }
+</script>
+<div class="row">
+    <div class="col s10 m10">
+        <div class="input-field">
+            <input type="text" id="search" name="q" />
+            <label for="search">Search term</label>
+        </div>
+    </div>
+    <div class="col s2 m2">
+        <button class="btn" onclick="search();">Search</button>
+    </div>
+</div>
+<div id="search-result">
+</div>
 <h3>Stats</h3>
-{% for i in chunks(stats, 4) %}
+{% for i in chunks(stats, 3) %}
 <div class="row">
     {% for stat in i %}
-    <div class="col s12 m3">
-        <div class="card medium {{ stat[2] }}">
+    <div class="col s12 m4">
+        <div class="card {{ stat[2] }}">
             <div class="card-content white-text">
                 <span class="card-title">{{ stat[0] }}</span>
                 <p>{{ stat[1] }}</p>

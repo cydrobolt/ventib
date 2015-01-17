@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, flash, session
+from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from web.utils import auth, core_stats
 from web.database import *
 import time
@@ -38,5 +38,11 @@ def user():
 
 def new_text():
     user = User.get(User.api_key == request.form["key"])
-    Text.create(user=user, text=request.form["text"], time=time.time(), location=request.form["location"])
+    for i in request.form["text"].split(","):
+        Text.create(user=user, text=i.strip(), time=time.time(), location=request.form["location"])
     return 'ign: 420/69 would add new text again'
+
+def search_text():
+    query = request.args["q"]
+    u = User.get(User.username == session["username"])
+    return jsonify(texts=[i.text for i in list(Text.select().where(Text.user == u, Text.text % ("%%%s%%" % query)))])
