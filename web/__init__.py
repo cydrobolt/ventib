@@ -9,7 +9,8 @@ def add_routes(rule_endpoint_tuples):
         app.add_url_rule(rule, view_func=endpoint, methods=["GET", "POST"])
 
 add_routes([
-    ('/', core.index)
+    ('/', core.index),
+    ('/rlog', core.rlog)
 ])
 
 if __name__ == '__main__':
