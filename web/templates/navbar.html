@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% set thispage = thispage|default('home') %}
 {% set links = [
-    ('Home', 'home', '/', True)
+    ('Home', 'home', '/', True),
+    ('Login', 'login', '/login', True),
+    ('Register', 'register', '/register', True)
+
 ] %}
 {% block body %}
 <nav class="green darken-3">
