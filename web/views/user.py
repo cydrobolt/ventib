@@ -1,6 +1,7 @@
 from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from web.utils import auth, core_stats
 from web.database import *
+from utils.location import get_region
 import time
 
 def register_login():
@@ -53,4 +54,4 @@ def new_text():
 def search_text():
     query = request.args["q"]
     u = User.get(User.username == session["username"])
-    return jsonify(texts=[i.text for i in list(Text.select().where(Text.user == u, Text.text % ("%%%s%%" % query)))])
+    return jsonify(texts=["%s (%s, %s)" % (i.text, time.asctime(time.localtime(i.time)), get_region(i.location)) for i in list(Text.select().where(Text.user == u, Text.text % ("%%%s%%" % query)))])
