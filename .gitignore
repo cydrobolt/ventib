@@ -2,3 +2,4 @@ __pycache__
 *.py[co]
 env
 config.py
+env3
