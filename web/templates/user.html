@@ -73,18 +73,16 @@
         var term = $("#search").val();
         $.getJSON('/api/search/', {q: term}, function(data) {
                 $("#search-result").html(data.texts.join("<br />"));
+                $(".loc").each(function( index ) {
+                    var needful = this;
+                    var scoords = $(needful).text();
+                    codeLatLng(scoords, function(res) {
+                        $(needful).html('<i class="mdi-maps-pin-drop"></i>' + res);
+                    })
+                });
         });
         console.log('shit');
-        $("#search-result").promise().done(function () {
-            console.log("yes");
-            $("#loc").each(function( index ) {
-                var scoords = $(this).text();
-                console.log(scoords);
-                var rgcval = codeLatLng(scoords);
-                console.log(rgcval);
-            });
-
-        });
+        console.log("yes");
     }
 
     var times_data = {{ times_data|safe }};
