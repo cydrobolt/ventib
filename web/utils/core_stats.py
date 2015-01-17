@@ -112,7 +112,7 @@ class CoreStats:
          </table>
         """.format(returnTRs)
         # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
-        return returnData
+        return data
 
     def most_common_time(self):
         d = {}

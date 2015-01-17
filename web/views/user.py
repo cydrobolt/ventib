@@ -34,9 +34,10 @@ def user():
             ("Most common time", stats.most_common_time(), "purple darken-4"),
             ("Markov chain", stats.markov_chains(), "green darken-4"),
     )
-    graphs = core_stats.GraphStats(user.texts, user.timezone)
-    return render_template("user.html", stats=stat_functions, user=user,
-            times_data=graphs.times())
+    # graphs = core_stats.GraphStats(user.texts, user.timezone)
+    return render_template("user.html", stats=stat_functions, user=user)
+    """,
+            times_data=graphs.times())"""
 
 def new_text():
     user = User.get(User.api_key == request.form["key"])
