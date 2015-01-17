@@ -10,8 +10,10 @@
             <a class="brand-logo" href="#">Ventib</a>
             <ul id="nav-mobile" class="right side-nav">
                 {% for link in links %}
-                {% if link[4] %}
-                    <a href="{{ link[2] }}"{% if thispage == link[1] %} class="active"{% endif %}>{{ link[0] }}</a>
+                {% if link[3] %}
+                <li{% if thispage == link[1] %} class="active"{% endif %}>
+                    <a href="{{ link[2] }}">{{ link[0] }}</a>
+                </li>
                 {% endif %}
                 {% endfor %}
             </ul>
