@@ -94,6 +94,7 @@ class CoreStats:
         data = sorted(data, reverse=True)
         # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
         return data
+
     def most_common_time(self):
         d = {}
         for i in self.data_array:
