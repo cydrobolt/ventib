@@ -73,7 +73,7 @@
                 <div class="card {{ stat[2] }}">
                     <div class="card-content white-text">
                         <span class="card-title">{{ stat[0] }}</span>
-                        <table class="small" style="font-size:80%">
+                        <table class="small white-text" style="font-size:80%">
                            <thead>
                              <tr>
                                  <th data-field="word">Word</th>
@@ -105,6 +105,7 @@
         {% endif %}
     {% endfor %}
 </div>
+{% endfor %}
 <h3>Graphs</h3>
 <div class="row">
     <div class="col s12 m6">
@@ -146,5 +147,4 @@
     var times_data = {{ times_data|safe }};
     var times = new Chart(ctx).Bar(times_data);
 </script>
-{% endfor %}
 {% endblock %}
