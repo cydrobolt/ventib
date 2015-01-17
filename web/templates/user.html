@@ -68,7 +68,6 @@
 <script src="/static/rgeocode.js"></script>
 <script>
     var ctx = $("#graph-times").get(0).getContext("2d");
-    var times_data = {{ times_data }};
     var times = new Chart(ctx);
 
     function enumRgc() {
@@ -85,6 +84,8 @@
         });
         enumRgc();
     }
+    var times_data = {{ times_data|safe }};
+    var times = new Chart(ctx).Bar(times_data);
 </script>
 {% endfor %}
 {% endblock %}

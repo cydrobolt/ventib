@@ -1,6 +1,7 @@
 # Ventrib Core Statistic Generator
 import time
 import random
+import json
 
 foul_words = list(map(str.strip, open("badwords.txt").read().splitlines()))
 
@@ -18,8 +19,9 @@ class CoreStats:
         self.data_array = data_array
         self.hour_offset = hour_offset
 
-    def time_of_day(self, unix_ts):
-        hour_of_day = time.gmtime(unix_ts).tm_hour + self.hour_offset
+    @staticmethod
+    def time_of_day(unix_ts, offset):
+        hour_of_day = time.gmtime(unix_ts).tm_hour + offset
 
         if hour_of_day < 5 or hour_of_day > 22:
             time_of_day = "night"
@@ -43,7 +45,7 @@ class CoreStats:
             for fw in foul_words:
                 if fw in speech:
                     foul_words_num += speech.count(fw)
-                    foul_words_tod[self.time_of_day(speech_date)] += 1
+                    foul_words_tod[self.time_of_day(speech_date, self.hour_offset)] += 1
 
         maxfoul = max(foul_words_tod.values())
         if maxfoul > 2:
@@ -98,9 +100,31 @@ class CoreStats:
     def most_common_time(self):
         d = {}
         for i in self.data_array:
-            t = self.time_of_day(i.time)
+            t = self.time_of_day(i.time, self.hour_offset)
             if t not in d:
                 d[t] = 0
             d[t] += 1
         data = [(i[1], i[0]) for i in d.items()]
         return "This user tends to talk a lot during the %s." % max(data)[1]
+
+class GraphStats:
+    def __init__(self, science, illuminati):
+        self.science = science
+        self.illuminati = illuminati
+
+    def times(self):
+        data = [0 for i in range(12)]
+        for k in self.science:
+            data[((time.gmtime(k.time).tm_hour + self.illuminati) % 24) // 2] += 1
+
+        return json.dumps({
+                "labels": [str(i * 2) for i in range(12)],
+                "datasets": [{
+                    "label": "Ayy lmao 420 blaze it smoke pebbles daily",
+                    "fillColor": "rgba(220, 220, 220, 0.5)",
+                    "strokeColor": "rgba(220, 220, 220, 0.8)",
+                    "highlightFill": "rgba(220, 220, 220, 0.75)",
+                    "highlightStroke": "rgba(220, 220, 220, 0.1)",
+                    "data": data
+                }]
+        })

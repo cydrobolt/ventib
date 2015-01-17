@@ -36,12 +36,10 @@ def user():
                 ("Most common time", stats.most_common_time(), "purple darken-4"),
                 ("Markov Chain", stats.markov_chains(), "green darken-4")
         )
-        return render_template("user.html", stats=stat_functions, user=user)
-    except:
+        graphs = core_stats.GraphStats(user.texts, user.timezone)
+        return render_template("user.html", stats=stat_functions, user=user, times_data=graphs.times())
+    except IndexError:
         return redirect("/nodata")
-    # graphs = core_stats.GraphStats(user.texts, user.timezone)
-    """,
-            times_data=graphs.times())"""
 def nodata():
     return render_template("nodata.html", user=user);
 
