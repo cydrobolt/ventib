@@ -18,6 +18,52 @@
 </div>
 <div id="search-result">
 </div>
+<div id="search-loading">
+
+
+            <div class="preloader-wrapper small active">
+              <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+
+</div>
 <h3>Stats</h3>
 {% for i in chunks(stats, 3) %}
 <div class="row">
@@ -68,21 +114,33 @@
 <script>
     var ctx = $("#graph-times").get(0).getContext("2d");
     var times = new Chart(ctx);
-
     function search() {
         var term = $("#search").val();
+        var thrott = 0;
         $.getJSON('/api/search/', {q: term}, function(data) {
+                $("#search-result").hide();
+                $("#search-loading").show();
                 $("#search-result").html(data.texts.join("<br />"));
                 $(".loc").each(function( index ) {
                     var needful = this;
                     var scoords = $(needful).text();
-                    codeLatLng(scoords, function(res) {
-                        $(needful).html('<i class="mdi-maps-pin-drop"></i>' + res);
-                    })
+                    if (cache2[scoords] != undefined) {
+                        $(needful).html('<i class="mdi-maps-pin-drop"></i>' + cache2[scoords]);
+                    }
+                    else {
+                        console.log("nocache");
+                        setTimeout( function () {
+                            codeLatLng(scoords, function(res) {
+                                $(needful).html('<i class="mdi-maps-pin-drop"></i>' + res);
+                                cache2[scoords] = res;
+                            });
+                        }, thrott);
+                        thrott += 1200;
+                    }
                 });
+                $("#search-loading").hide();
+                $("#search-result").show();
         });
-        console.log('shit');
-        console.log("yes");
     }
 
     var times_data = {{ times_data|safe }};

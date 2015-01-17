@@ -4,10 +4,17 @@
         <script src="/static/jquery/jquery.min.js"></script>
         <script src="/static/materialize/js/materialize.min.js"></script>
         <script src="/static/chart/Chart.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD6DVxbi7-2fmYyfjkWVMmE8Jh-UZGinpE"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDUfH2rcZMI650GRtspHhpzmM5pVIYmkdw"></script>
         <script src="/static/rgeocode.js"></script>
         <link href="/static/materialize/css/materialize.min.css" rel="stylesheet" type="text/css" />
         <link href="/static/app.css" rel="stylesheet" type="text/css" />
+        <script>
+        $(function () {
+            $("#search-loading").hide();
+        });
+        window.cache2 = [];
+
+        </script>
     </head>
     <body>
         {% block body %}
