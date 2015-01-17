@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
-{% set thispage = thispage|default('home')}
+{% set thispage = thispage|default('home') %}
 {% set links = [
-    ('Home', 'home', '/')
+    ('Home', 'home', '/', True)
 ] %}
 {% block body %}
 <nav class="green darken-3">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="#">Ventib</a>
+            <a class="brand-logo" href="#">Ventib</a>
             <ul id="nav-mobile" class="right side-nav">
                 {% for link in links %}
+                {% if link[4] %}
                     <a href="{{ link[2] }}"{% if thispage == link[1] %} class="active"{% endif %}>{{ link[0] }}</a>
+                {% endif %}
                 {% endfor %}
             </ul>
             <a class="button-collapse" href="#" data-activates="nav-mobile">
@@ -19,6 +21,8 @@
         </div>
     </div>
 </nav>
-{% block content %}
-{% endblock %}
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
 {% endblock %}
