@@ -88,29 +88,6 @@ class CoreStats:
             d[word] += 1
         data = [(i[1], i[0]) for i in d.items()]
         data = sorted(data, reverse=True)
-        returnTRs = ""
-        for i in data[:6]:
-            returnTRs += """
-          <tr>
-            <td>{}</td>
-            <td>{}</td>
-          </tr>
-          """.format(i[1], i[0])
-
-        returnData = """
-         <table class="small" style="font-size:80%">
-            <thead>
-              <tr>
-                  <th data-field="word">Word</th>
-                  <th data-field="occurences">Occurences</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {}
-            </tbody>
-         </table>
-        """.format(returnTRs)
         # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
         return data
 
