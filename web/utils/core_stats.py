@@ -19,7 +19,7 @@ class CoreStats:
         self.hour_offset = hour_offset
 
     def time_of_day(self, unix_ts):
-        hour_of_day = time.localtime(unix_ts).tm_hour + self.hour_offset
+        hour_of_day = time.gmtime(unix_ts).tm_hour + self.hour_offset
 
         if hour_of_day < 5 or hour_of_day > 22:
             time_of_day = "night"
@@ -87,7 +87,8 @@ class CoreStats:
                 d[word] = 0
             d[word] += 1
         data = [(i[1], i[0]) for i in d.items()]
-        return "This user's most common word is '%s'." % max(data)[1]
+        data = sorted(data, reverse=True)
+        return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
 
     def most_common_time(self):
         d = {}
