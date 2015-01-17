@@ -16,6 +16,7 @@ add_routes([
     ('/register/', user.register),
     ('/login/', user.login),
     ('/user/', user.user),
+    ('/logout/', user.logout),
     ('/420/blazeit/', user.new_text)
 ])
 

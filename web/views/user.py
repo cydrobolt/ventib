@@ -19,6 +19,10 @@ def login():
     session["username"] = user.username
     return redirect(url_for("user"))
 
+def logout():
+    session["username"] = False
+    return redirect("/")
+
 def user():
     user = User.get(User.username == session["username"])
     stats = core_stats.CoreStats(user.texts, user.timezone)
@@ -36,4 +40,3 @@ def new_text():
     user = User.get(User.api_key == request.form["key"])
     Text.create(user=user, text=request.form["text"], time=time.time(), location=request.form["location"])
     return 'ign: 420/69 would add new text again'
-
