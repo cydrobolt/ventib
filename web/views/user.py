@@ -49,7 +49,7 @@ def new_text():
     user = User.get(User.api_key == request.form["key"])
     for i in request.form["text"].split(","):
         Text.create(user=user, text=i.strip(), time=time.time(), location=request.form["location"])
-    return 'ign: 420/69 would add new text again'
+    return '200 OK'
 
 def search_text():
     query = request.args["q"]
