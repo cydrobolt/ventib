@@ -116,6 +116,20 @@ class CoreStats:
         # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
         return data
 
+    def least_common_word(self):
+        words = sum([i.text.split() for i in list(filter(lambda k: k.time > (time.time() - 86400), self.data_array))], [])
+        d = {}
+        for word in words:
+            if word.isnumeric():
+                continue
+            if word not in d:
+                d[word] = 0
+            d[word] += 1
+        data = [(i[1], i[0]) for i in d.items()]
+        data = sorted(data, reverse=False)
+        # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
+        return data
+
     def most_common_time(self):
         d = {}
         for i in self.data_array:

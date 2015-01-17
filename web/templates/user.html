@@ -68,7 +68,7 @@
 {% for i in chunks(stats, 3) %}
 <div class="row">
     {% for stat in i %}
-        {% if stat[0] == "Most common words" %}
+        {% if stat[0] == "Most common words" or stat[0] == "Least common words"%}
             <div class="col s12 m4">
                 <div class="card {{ stat[2] }}">
                     <div class="card-content white-text">

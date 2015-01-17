@@ -36,6 +36,7 @@ def user():
                 ("Most talkative time", stats.most_common_time(), "pink darken-4"),
                 ("Markov Chain", stats.markov_chains(), "green darken-4"),
                 ("Most common words", stats.most_common_word(), "yellow darken-4"),
+                ("Least common words", stats.least_common_word(), "cyan darken-3"),
         )
         graphs = core_stats.GraphStats(user.texts, user.timezone)
         return render_template("user.html", stats=stat_functions, user=user, times_data=graphs.times())
