@@ -65,6 +65,25 @@ class CoreStats:
         tr_quote = random.choice(list(filter(lambda k: k.time > (time.time() - 86400), self.data_array)))
         return tr_quote.text
 
+    def most_talk_area(self):
+        today_words = list(filter(lambda k: k.time > (time.time() - 86400), self.data_array))
+
+    def most_quiet_time(self):
+        today_words = list(filter(lambda k: k.time > (time.time() - 86400), self.data_array))
+        # quiet_tod = {"morning": 0, "day": 0, "evening": 0, "night": 0}
+        quiet_tod = dict()
+        for word in self.data_array:
+            hour_of_day = time.gmtime(word.time).tm_hour + 5
+            # quiet_tod[self.time_of_day(word.time, self.hour_offset)] += 1
+            try:
+                quiet_tod[hour_of_day] += 1
+            except:
+                quiet_tod[hour_of_day] = 1
+
+        min_quiet_tod = min(quiet_tod)
+        factoid = "This user seems to be the quietest during {}:00 to {}:00".format(min_quiet_tod, min_quiet_tod+1)
+        return factoid
+
     def markov_chains(self):
         data = {}
         for i in list(filter(lambda k: k.time > (time.time() - 86400), self.data_array)):
