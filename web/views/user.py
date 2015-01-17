@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, request, flash, session
 from web.utils import auth
 
 def register_login():
-    return render_templates("register_login.html")
+    return render_template("register_login.html")
 
 def register():
     auth.create_user(request.form["username"], request.form["password"])

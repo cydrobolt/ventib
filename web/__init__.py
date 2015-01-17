@@ -10,7 +10,10 @@ def add_routes(rule_endpoint_tuples):
 
 add_routes([
     ('/', core.index),
-    ('/rlog', core.rlog)
+    ('/register_login/', user.register_login),
+    ('/register/', user.register),
+    ('/login/', user.login),
+    ('/user/', user.user)
 ])
 
 if __name__ == '__main__':

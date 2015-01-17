@@ -1,0 +1,47 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<script>
+    function check(i) {
+        console.log("checking the needful");
+        $("#error").html($("#reg-confirmpassword").val() != $("#reg-password").val() ? 'Passwords must match.': '');
+        $("#regbtn").attr('disabled', $("#reg-confirmpassword").val() != $("#reg-password").val())
+    }
+</script>
+<div class="row">
+    <div class="col m6 s12">
+        <h2>Login</h2>
+        <form action="/login/" method="POST">
+            <div class="input-field">
+                <input type="text" name="username" id="l-username" />
+                <label for="l-username">Username</label>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" id="l-password" />
+                <label for="l-password">Password</label>
+            </div>
+            <input class="btn" type="submit" value="Login" />
+        </form>
+    </div>
+    <div class="col m6 s12">
+        <h2>Register</h2>
+        <form action="/register/" id="regform" method="POST">
+            <div class="input-field">
+                <input type="text" id="reg-username" name="username" />
+                <label for="reg-username">Username</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="reg-password" name="password" oninput="check()" />
+                <label for="reg-password">Password</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="reg-confirmpassword" name="confirmpassword" oninput="check()"; />
+                <label for="reg-confirmpassword">Confirm password</label>
+            </div>
+            <div class="red-text" id="error"></div>
+            <input class="btn" id="regbtn" type="submit" value="Register" />
+        </form>
+        <div>
+        </div>
+    </div>
+</div>
+{% endblock %}
