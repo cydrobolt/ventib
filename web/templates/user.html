@@ -39,5 +39,17 @@
     </div>
     {% endfor %}
 </div>
+<h3>Graphs</h3>
+<div class="row">
+    <div class="col s12 m6">
+        <canvas id="graph-times"></canvas>
+    </div>
+</div>
+<script>
+    var ctx = $("#graph-times").get(0).getContext("2d");
+    var times_data = {{ times_data }};
+    var times = new Chart(ctx);
+
+</script>
 {% endfor %}
 {% endblock %}
