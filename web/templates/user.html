@@ -8,7 +8,7 @@
         var term = $("#search").val();
         $.getJSON('/api/search/', {q: term}, function(data) {
                 $("#search-result").html(data.texts.join("<br />"));
-        })
+                })
     }
 </script>
 <div class="row">
