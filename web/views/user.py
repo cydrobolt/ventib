@@ -19,6 +19,10 @@ def login():
     session["username"] = user.username
     return redirect(url_for("user"))
 
+def logout():
+    session["username"] = False
+    return redirect("/")
+
 def user():
     user = User.get(User.username == session["username"])
     stats = core_stats.CoreStats(user.texts, user.timezone)

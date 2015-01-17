@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% set thispage = thispage|default('home') %}
 {% set links = [
-    ('Home', 'home', '/', True),
-    ('Register or Login', 'rlog', '/register_login/', True),
-
+    ('Home', 'home', '/', True, 1),
+    ('Register or Login', 'rlog', '/register_login/', True, 2),
+    ('Dashboard', 'dashboard', '/user', True, 3),
+    ('Logout', 'logout', '/logout', True, 3)
 ] %}
 {% block body %}
 <nav class="green darken-3">
@@ -12,11 +13,23 @@
             <a class="brand-logo" href="#">Ventib</a>
             <ul id="nav-mobile" class="right side-nav">
                 {% for link in links %}
-                {% if link[3] %}
-                <li{% if thispage == link[1] %} class="active"{% endif %}>
-                    <a href="{{ link[2] }}">{{ link[0] }}</a>
-                </li>
-                {% endif %}
+                    {% if link[3] %}
+                        {% if link[4] == 1 %}
+                            <li{% if thispage == link[1] %} class="active"{% endif %}>
+                                <a href="{{ link[2] }}">{{ link[0] }}</a>
+                            </li>
+                        {% endif %}
+                        {% if link[4] == 2 and not session['username'] %}
+                            <li{% if thispage == link[1] %} class="active"{% endif %}>
+                                <a href="{{ link[2] }}">{{ link[0] }}</a>
+                            </li>
+                        {% endif %}
+                        {% if link[4] == 3 and session['username'] %}
+                            <li{% if thispage == link[1] %} class="active"{% endif %}>
+                                <a href="{{ link[2] }}">{{ link[0] }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
             </ul>
             <a class="button-collapse" href="#" data-activates="nav-mobile">

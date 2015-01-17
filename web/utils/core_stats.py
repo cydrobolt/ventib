@@ -1,6 +1,5 @@
 # Ventrib Core Statistic Generator
 import time
-import pykov
 import random
 
 foul_words = list(map(str.strip, open("badwords.txt").read().splitlines()))
