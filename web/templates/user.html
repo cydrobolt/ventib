@@ -1,8 +1,9 @@
 {% extends 'navbar.html' %}
 {% set thispage='dashboard' %}
 {% block content %}
-<h2>Hello, {{ user.username }}</h2>
-<h3>Text</h3>
+<h2><span style="font-size: 40%" class="grey-text">Hello, </span><span class="darken-4 blue-text">{{ user.username }}</span></h2>
+
+<h4>Text</h4>
 <script>
     function search() {
         var term = $("#search").val();
