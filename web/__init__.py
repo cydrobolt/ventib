@@ -19,6 +19,7 @@ add_routes([
     ('/420/blazeit/', user.new_text),
     ('/api/search/', user.search_text),
     ('/logout/', user.logout),
+    ('/nodata/', user.nodata)
 ])
 
 def chunks(l, n):

@@ -59,6 +59,10 @@ class CoreStats:
             return "This user doesn't say much, with only %d sentences in the last 24 hours." % l
         return "This user said %d sentences in the last 24 hours." % l
 
+    def random_quote(self):
+        tr_quote = random.choice(list(filter(lambda k: k.time > (time.time() - 86400), self.data_array)))
+        return tr_quote.text
+
     def markov_chains(self):
         data = {}
         for i in list(filter(lambda k: k.time > (time.time() - 86400), self.data_array)):
@@ -90,7 +94,6 @@ class CoreStats:
         data = sorted(data, reverse=True)
         # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
         return data
-
     def most_common_time(self):
         d = {}
         for i in self.data_array:

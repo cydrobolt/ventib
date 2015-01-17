@@ -24,20 +24,25 @@ def logout():
     return redirect("/")
 
 def user():
-    user = User.get(User.username == session["username"])
-    stats = core_stats.CoreStats(user.texts, user.timezone)
-    stat_functions = (
-            ("Swear words", stats.foul_words_stats(), "red darken-4"),
-            ("Sentences spoken", stats.general_stats_total_sentences(), "blue darken-4"),
-            ("Markov chain", stats.markov_chains(), "orange darken-4"),
-            ("Most common words", stats.most_common_word(), "yellow darken-4"),
-            ("Most common time", stats.most_common_time(), "purple darken-4"),
-            ("Markov chain", stats.markov_chains(), "green darken-4"),
-    )
+    try:
+        user = User.get(User.username == session["username"])
+        stats = core_stats.CoreStats(user.texts, user.timezone)
+        stat_functions = (
+                ("Swear words", stats.foul_words_stats(), "red darken-4"),
+                ("Sentences spoken", stats.general_stats_total_sentences(), "blue darken-4"),
+                ("Random Quote", stats.random_quote(), "orange darken-4"),
+                ("Most common words", stats.most_common_word(), "yellow darken-4"),
+                ("Most common time", stats.most_common_time(), "purple darken-4"),
+                ("Markov Chain", stats.markov_chains(), "green darken-4")
+        )
+        return render_template("user.html", stats=stat_functions, user=user)
+    except:
+        return redirect("/nodata")
     # graphs = core_stats.GraphStats(user.texts, user.timezone)
-    return render_template("user.html", stats=stat_functions, user=user)
     """,
             times_data=graphs.times())"""
+def nodata():
+    return render_template("nodata.html", user=user);
 
 def new_text():
     user = User.get(User.api_key == request.form["key"])
