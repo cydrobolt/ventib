@@ -43,7 +43,7 @@ class CoreStats:
             for fw in foul_words:
                 if fw in speech:
                     foul_words_num += speech.count(fw)
-            foul_words_tod[self.time_of_day(speech_date)] += 1
+                    foul_words_tod[self.time_of_day(speech_date)] += 1
 
         maxfoul = max(foul_words_tod.values())
         if maxfoul > 2:
