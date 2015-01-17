@@ -4,14 +4,7 @@
 <h2><span style="font-size: 40%" class="grey-text">Hello, </span><span class="darken-4 blue-text">{{ user.username }}</span></h2>
 
 <h4>Text</h4>
-<script>
-    function search() {
-        var term = $("#search").val();
-        $.getJSON('/api/search/', {q: term}, function(data) {
-                $("#search-result").html(data.texts.join("<br />"));
-                })
-    }
-</script>
+
 <div class="row">
     <div class="col s10 m10">
         <div class="input-field">
@@ -72,11 +65,26 @@
         <canvas id="graph-times"></canvas>
     </div>
 </div>
+<script src="/static/rgeocode.js"></script>
 <script>
     var ctx = $("#graph-times").get(0).getContext("2d");
     var times_data = {{ times_data }};
     var times = new Chart(ctx);
 
+    function enumRgc() {
+        $(".loc").each(function() {
+            var scoords = $(".loc").val();
+            var rgcval = getLatLng(scoords);
+            console.log(rgcval);
+        });
+    }
+    function search() {
+        var term = $("#search").val();
+        $.getJSON('/api/search/', {q: term}, function(data) {
+                $("#search-result").html(data.texts.join("<br />"));
+        });
+        enumRgc();
+    }
 </script>
 {% endfor %}
 {% endblock %}
