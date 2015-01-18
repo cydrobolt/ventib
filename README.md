@@ -11,7 +11,7 @@ Install dependencies:
  - `postgresql`
 
 Install Pip dependencies: `pip install -r requirements.txt`
-
+Configurate your instance: `vi web/config.py`
 Run Ventib: `python3 run.py`
 
 ==============
