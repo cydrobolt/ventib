@@ -13,3 +13,10 @@ Install dependencies:
 Install Pip dependencies: `pip install -r requirements.txt`
 
 Run Ventib: `python3 run.py`
+
+==============
+
+The mobile application:
+
+https://github.com/sdamashek/ventibapp
+(Android)
