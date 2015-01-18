@@ -118,8 +118,8 @@
 </div>
 {% endfor %}
 <h3>Activity over Time</h3>
-<div class="row">
-    <div class="col s12 m6">
+<div class="row" style="padding-bottom:100px">
+    <div>
         <canvas id="graph-times"></canvas>
     </div>
 </div>
@@ -198,6 +198,9 @@
         });
     }
     var times_data = {{ times_data|safe }};
+    ctx.canvas.width = 960;
+    ctx.canvas.height = 400;
     var times = new Chart(ctx).Bar(times_data);
+
 </script>
 {% endblock %}

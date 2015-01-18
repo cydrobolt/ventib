@@ -153,10 +153,10 @@ class GraphStats:
         return json.dumps({
                 "labels": [str(i * 2) for i in range(12)],
                 "datasets": [{
-                    "label": "Ayy lmao 420 blaze it smoke pebbles daily",
-                    "fillColor": "rgba(220, 220, 220, 0.5)",
-                    "strokeColor": "rgba(220, 220, 220, 0.8)",
-                    "highlightFill": "rgba(220, 220, 220, 0.75)",
+                    "label": "Speech Activity Over Time",
+                    "fillColor": "green",
+                    "strokeColor": "lightgreen",
+                    "highlightFill": "lightgreen",
                     "highlightStroke": "rgba(220, 220, 220, 0.1)",
                     "data": data
                 }]
