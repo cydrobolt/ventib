@@ -16,7 +16,7 @@ function codeLatLng(input, fn) {
                 fn(rgc);
             }
         } else {
-            alert("Geocoder failed due to: " + status);
+            console.log("Geocoder failed due to: " + status);
         }
     });
 }

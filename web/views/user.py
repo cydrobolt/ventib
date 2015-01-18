@@ -58,4 +58,4 @@ def new_text():
 def search_text():
     query = request.args["q"]
     u = User.get(User.username == session["username"])
-    return jsonify(texts=["%s (%s, <span class=\"loc\">%s</span>)" % (i.text, time.asctime(time.localtime(i.time)), i.location) for i in list(Text.select().where(Text.user == u, Text.text % ("%%%s%%" % query)))])
+    return jsonify(texts=["%s@@@@@SPL~T@@@@@@%s@@@@@SPL~T@@@@@@<span class=\"loc\">%s</span>" % (i.text, time.asctime(time.localtime(i.time)), i.location) for i in list(Text.select().where(Text.user == u, Text.text % ("%%%s%%" % query)))])
