@@ -93,6 +93,17 @@
                     </div>
                 </div>
             </div>
+        {% elif stat[0] == "Random Quote" %}
+            <div class="col s12 m4">
+                <div class="card {{ stat[2] }}">
+                    <div class="card-content white-text">
+                        <a href="javascript:void();" onclick="refreshQuote();"><i class="mdi-navigation-refresh right"></i></a>
+                        <br />
+                        <span class="card-title">{{ stat[0] }}</span>
+                        <p id="randomQuote">{{ stat[1] }}</p>
+                    </div>
+                </div>
+            </div>
         {% else %}
             <div class="col s12 m4">
                 <div class="card {{ stat[2] }}">
@@ -143,7 +154,15 @@
                 $("#search-result").show();
         });
     }
-
+    function refreshQuote() {
+        $.ajax({
+          type: "POST",
+          url: "/api/refresh_quote/"
+        })
+        .done(function( msg ) {
+            $("#randomQuote").html(msg);
+        });
+    }
     var times_data = {{ times_data|safe }};
     var times = new Chart(ctx).Bar(times_data);
 </script>

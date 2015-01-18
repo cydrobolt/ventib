@@ -1,7 +1,6 @@
 from flask import render_template, redirect, url_for, request, flash, session, jsonify
 from web.utils import auth, core_stats
 from web.database import *
-from web.utils.location import get_region
 import time
 
 def register_login():
@@ -42,6 +41,11 @@ def user():
         return render_template("user.html", stats=stat_functions, user=user, times_data=graphs.times())
     except IndexError:
         return redirect("/nodata")
+def refresh_quote():
+    user = User.get(User.username == session["username"])
+    stats = core_stats.CoreStats(user.texts, user.timezone)
+    return stats.random_quote()
+
 def nodata():
     return render_template("nodata.html", user=user);
 
