@@ -1,6 +1,6 @@
 from peewee import *
 from . import config
-db = PostgresqlDatabase(host='104.131.66.35', user='pennappsxi', password=config.password, database="pennappsxi")
+db = PostgresqlDatabase(host=config.host, user=config.user, password=config.password, database=config.database)
 
 class BaseModel(Model):
     class Meta:
