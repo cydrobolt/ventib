@@ -4,7 +4,7 @@ Ventib offers the capability of parsing your speech and generating valuable stat
 
 Ventib uses speech pattern analysis to provide statistics based on users’ real-time speech habits. Ventib analyses the content, location, and timing of your speech.
 
-Chart.js and Google Maps' geotagging API are used to locate, graph, and extrapolate users’ speech
+Chart.js and Google Maps' geotagging API are used to locate, graph, and extrapolate users’ speech.
 
 ## Running Ventib
 Using a virtualenv3 is highly recommended.
@@ -18,9 +18,5 @@ Install Pip dependencies: `pip3 install -r requirements.txt`
 Configurate your instance: `cp config.py web/ && vi web/config.py`
 Run Ventib: `python3 run.py`
 
---
-
-The mobile application:
-
-https://github.com/cydrobolt/ventibapp
-(Android)
+To access the Ventib client, head to `/client` on your Ventib instance and approve the use
+of your microphone and location to the page.
