@@ -1,6 +1,6 @@
 # Ventib
 
-![Ventib](http://i.imgur.com/OWTJSUh.png)
+![Ventib](http://i.imgur.com/EQ08J0U.png)
 
 Ventib offers the capability of parsing your speech and generating valuable statistics based on environmental factors. It also provides a search function, allowing users to sift through their past speech.
 
