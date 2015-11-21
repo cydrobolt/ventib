@@ -14,7 +14,7 @@ def register():
 def login():
     user = auth.authenticate_user(request.form["username"], request.form["password"])
     if not user:
-        flash("Wrong!")
+        flash("Incorrect Password.")
         return redirect(url_for("register_login"))
     session["username"] = user.username
     return redirect(url_for("user"))
@@ -28,19 +28,20 @@ def user():
         user = User.get(User.username == session["username"])
         stats = core_stats.CoreStats(user.texts, user.timezone)
         stat_functions = (
-                ("Swear words", stats.foul_words_stats(), "red darken-4"),
-                ("Sentences spoken", stats.general_stats_total_sentences(), "blue darken-4"),
-                ("Random Quote", stats.random_quote(), "orange darken-4"),
-                ("Quietest time", stats.most_quiet_time(), "purple darken-2"),
-                ("Most talkative time", stats.most_common_time(), "pink darken-4"),
-                ("Markov Chain", stats.markov_chains(), "green darken-4"),
-                ("Most common words", stats.most_common_word(), "yellow darken-4"),
-                ("Least common words", stats.least_common_word(), "cyan darken-3"),
+            ("Swear words", stats.foul_words_stats(), "red darken-4"),
+            ("Sentences spoken", stats.general_stats_total_sentences(), "blue darken-4"),
+            ("Random Quote", stats.random_quote(), "orange darken-4"),
+            ("Quietest time", stats.most_quiet_time(), "purple darken-2"),
+            ("Most talkative time", stats.most_common_time(), "pink darken-4"),
+            ("Markov Chain", stats.markov_chains(), "green darken-4"),
+            ("Most common words", stats.most_common_word(), "yellow darken-4"),
+            ("Least common words", stats.least_common_word(), "cyan darken-3"),
         )
         graphs = core_stats.GraphStats(user.texts, user.timezone)
         return render_template("user.html", stats=stat_functions, user=user, times_data=graphs.times())
     except IndexError:
         return redirect("/nodata")
+
 def refresh_quote():
     user = User.get(User.username == session["username"])
     stats = core_stats.CoreStats(user.texts, user.timezone)
@@ -51,9 +52,18 @@ def nodata():
 
 def new_text():
     user = User.get(User.api_key == request.form["key"])
+
+    if not user:
+        return "Invalid Credentials", 400
+
     for i in request.form["text"].split(","):
         Text.create(user=user, text=i.strip(), time=time.time(), location=request.form["location"])
     return '200 OK'
+
+def display_client():
+    user = User.get(User.username == session["username"])
+    user_api_key = user.api_key
+    return render_template("client.html", api_key=user_api_key)
 
 def search_text():
     query = request.args["q"]

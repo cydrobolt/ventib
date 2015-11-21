@@ -66,11 +66,12 @@ class CoreStats:
         return tr_quote.text
 
     def most_talk_area(self):
+        # TODO
+        return False
         today_words = list(filter(lambda k: k.time > (time.time() - 86400), self.data_array))
 
     def most_quiet_time(self):
         today_words = list(filter(lambda k: k.time > (time.time() - 86400), self.data_array))
-        # quiet_tod = {"morning": 0, "day": 0, "evening": 0, "night": 0}
         quiet_tod = dict()
         for word in self.data_array:
             hour_of_day = time.gmtime(word.time).tm_hour + 5
@@ -113,7 +114,6 @@ class CoreStats:
             d[word] += 1
         data = [(i[1], i[0]) for i in d.items()]
         data = sorted(data, reverse=True)
-        # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
         return data
 
     def least_common_word(self):
@@ -127,7 +127,6 @@ class CoreStats:
             d[word] += 1
         data = [(i[1], i[0]) for i in d.items()]
         data = sorted(data, reverse=False)
-        # return "This user's most common words are %s." % ", ".join([i[1] for i in data[:20]])
         return data
 
     def most_common_time(self):

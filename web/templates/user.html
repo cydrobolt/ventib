@@ -1,5 +1,6 @@
 {% extends 'navbar.html' %}
 {% set thispage='dashboard' %}
+
 {% block content %}
 <h3 style="text-align:center" class="cyan-text darken-4">Ventib Dashboard</h3>
 
@@ -19,102 +20,106 @@
 <div id="search-result">
 </div>
 <div id="search-loading">
-
-
-            <div class="preloader-wrapper small active">
-              <div class="spinner-layer spinner-blue">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div><div class="gap-patch">
-                  <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-
-              <div class="spinner-layer spinner-red">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div><div class="gap-patch">
-                  <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-
-              <div class="spinner-layer spinner-yellow">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div><div class="gap-patch">
-                  <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-
-              <div class="spinner-layer spinner-green">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div><div class="gap-patch">
-                  <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
+    <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
             </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+
+        <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+
+        <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
 
 </div>
 <h3>Stats</h3>
 {% for i in chunks(stats, 3) %}
 <div class="row">
-    {% for stat in i %}
-        {% if stat[0] == "Most common words" or stat[0] == "Least common words"%}
-            <div class="col s12 m4">
-                <div class="card {{ stat[2] }}">
-                    <div class="card-content white-text">
-                        <span class="card-title">{{ stat[0] }}</span>
-                        <table class="small white-text" style="font-size:80%">
-                           <thead>
-                             <tr>
-                                 <th data-field="word">Word</th>
-                                 <th data-field="occurences">Occurences</th>
-                             </tr>
-                           </thead>
+    {% for stat in i %} {% if stat[0] == "Most common words" or stat[0] == "Least common words"%}
+    <div class="col s12 m4">
+        <div class="card {{ stat[2] }}">
+            <div class="card-content white-text">
+                <span class="card-title">{{ stat[0] }}</span>
+                <table class="small white-text" style="font-size:80%">
+                    <thead>
+                        <tr>
+                            <th data-field="word">Word</th>
+                            <th data-field="occurences">Occurences</th>
+                        </tr>
+                    </thead>
 
-                           <tbody>
-                             {% for cm_word in stat[1][:5] %}
-                                <tr>
-                                  <td>{{ cm_word[1] }}</td>
-                                  <td>{{ cm_word[0] }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    <tbody>
+                        {% for cm_word in stat[1][:5] %}
+                        <tr>
+                            <td>{{ cm_word[1] }}</td>
+                            <td>{{ cm_word[0] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        {% elif stat[0] == "Random Quote" %}
-            <div class="col s12 m4">
-                <div class="card {{ stat[2] }}">
-                    <div class="card-content white-text">
-                        <a href="javascript:void();" onclick="refreshQuote();"><i class="mdi-navigation-refresh right"></i></a>
-                        <br />
-                        <span class="card-title">{{ stat[0] }}</span>
-                        <p id="randomQuote">{{ stat[1] }}</p>
-                    </div>
-                </div>
+        </div>
+    </div>
+    {% elif stat[0] == "Random Quote" %}
+    <div class="col s12 m4">
+        <div class="card {{ stat[2] }}">
+            <div class="card-content white-text">
+                <a href="javascript:void();" onclick="refreshQuote();"><i class="mdi-navigation-refresh right"></i></a>
+                <br />
+                <span class="card-title">{{ stat[0] }}</span>
+                <p id="randomQuote">{{ stat[1] }}</p>
             </div>
-        {% else %}
-            <div class="col s12 m4">
-                <div class="card {{ stat[2] }}">
-                    <div class="card-content white-text">
-                        <span class="card-title">{{ stat[0] }}</span>
-                        <p>{{ stat[1] }}</p>
-                    </div>
-                </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col s12 m4">
+        <div class="card {{ stat[2] }}">
+            <div class="card-content white-text">
+                <span class="card-title">{{ stat[0] }}</span>
+                <p>{{ stat[1] }}</p>
             </div>
-        {% endif %}
-    {% endfor %}
+        </div>
+    </div>
+    {% endif %} {% endfor %}
 </div>
 {% endfor %}
 <h3>Activity over Time</h3>
@@ -123,84 +128,12 @@
         <canvas id="graph-times"></canvas>
     </div>
 </div>
+{% endblock %}
+
+{% block extrajs %}
 <script>
-    var ctx = $("#graph-times").get(0).getContext("2d");
-    var times = new Chart(ctx);
-    window.cache2["0,0"] = "Location Unavailable";
-    var throttles = [];
-    function searchTableGen(a, b, c) {
-        var template = '<tr>\
-          <td>'+ a +'</td>\
-          <td>'+ b +'</td>\
-          <td>'+ c +'</td>\
-        </tr>';
-        return template;
-    }
-    function search() {
-        try {
-            var term = $("#search").val();
-            var thrott = 0;
-            $.getJSON('/api/search/', {q: term}, function(data) {
-                    $("#search-result").hide();
-                    $("#search-loading").show();
-                    var tableContents = "";
-                    window.tableTemplate = "";
-                    /*var dataarr = $.map(data, function(value, index) {
-                        return [data];
-                    });*/
-                    data.texts.forEach(function(el, index, ar) {
-                        window.elements = el.split("@@@@@SPL~T@@@@@@");
-                        tableContents += searchTableGen(elements[0], elements[1], elements[2]);
-                        console.log(tableContents);
-                    });
-                    tableTemplate = '<table class="small" style="font-size:80%">\
-                       <tbody>\
-                    ' + tableContents +'\
-                       </tbody>\
-                    </table>';
-                    $("#search-result").html(tableTemplate);
-                     for(var i = 0, z = throttles.length; i < z; i++)
-                         clearTimeout(throttles[i]);
-                    throttles = [];
-
-                    $(".loc").each(function( index ) {
-                        var needful = this;
-                        var scoords = $(needful).text();
-                        if (cache2[scoords] != undefined) {
-                            $(needful).html('<i class="mdi-maps-pin-drop"></i>' + cache2[scoords]);
-                        }
-                        else {
-                            console.log("nocache");
-                            throttles.push(setTimeout( function () {
-                                codeLatLng(scoords, function(res) {
-                                    $(needful).html('<i class="mdi-maps-pin-drop"></i>' + res);
-                                    cache2[scoords] = res;
-                                });
-                            }, thrott));
-                            thrott += 1200;
-                        }
-                    });
-                    $("#search-loading").hide();
-                    $("#search-result").show();
-                });
-        }
-        catch (err) {
-            console.log("Error: "+err);
-        }
-    }
-    function refreshQuote() {
-        $.ajax({
-          type: "POST",
-          url: "/api/refresh_quote/"
-        })
-        .done(function( msg ) {
-            $("#randomQuote").html(msg);
-        });
-    }
     var times_data = {{ times_data|safe }};
-    ctx.canvas.width = 960;
-    ctx.canvas.height = 400;
-    var times = new Chart(ctx).Bar(times_data);
-
 </script>
+<script src="/static/js/coord-geocode.js"></script>
+<script src='/static/js/user.js'></script>
 {% endblock %}

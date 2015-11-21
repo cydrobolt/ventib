@@ -1,0 +1,11 @@
+<script>
+    $(function () {
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    Materialize.toast('{{ message }}', 4000);
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    });    
+</script>

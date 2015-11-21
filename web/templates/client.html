@@ -1,0 +1,22 @@
+{% extends "navbar.html" %}
+
+{% block extracss %}
+<link href="/static/css/wit-mic.css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block content %}
+<h4>Ventib Client</h4>
+
+<p>Please allow Ventib to access your location and your microphone to continue.</p>
+
+<div id="microphone"></div>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+window.api_key = '{{api_key}}';
+</script>
+<script src='/static/js/wit-mic.js'></script>
+<script src='/static/js/client.js'></script>
+{% endblock %}

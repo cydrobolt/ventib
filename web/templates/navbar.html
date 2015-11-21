@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
-{% set thispage = thispage|default('home') %}
+{% set thispage = thispage | default('home') %}
 {% set links = [
     ('Home', 'home', '/', True, 1),
     ('Register or Login', 'rlog', '/register_login/', True, 2),
     ('Dashboard', 'dashboard', '/user', True, 3),
     ('Logout', 'logout', '/logout', True, 3)
 ] %}
+
+{% block css %}
+{% block extracss %}{% endblock %}
+{% endblock %}
+
 {% block body %}
 <nav class="green darken-3">
     <div class="container">
         <div class="nav-wrapper">
-            <a class="brand-logo" href="#">Ventib</a>
+            <a class="brand-logo" href="/">Ventib</a>
             <ul id="nav-mobile" class="right side-nav">
                 {% for link in links %}
                     {% if link[3] %}
@@ -40,6 +45,11 @@
 </nav>
 <div class="container">
     {% block content %}
+    {% endblock %}
+
+    {% block js %}
+        {% include "toasts.html" with context %}
+        {% block extrajs %}{% endblock %}
     {% endblock %}
 </div>
 {% endblock %}

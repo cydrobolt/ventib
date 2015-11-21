@@ -1,6 +1,8 @@
 from peewee import *
 from . import config
-db = PostgresqlDatabase(host=config.host, user=config.user, password=config.password, database=config.database)
+# Uncomment to use Postgresql
+# db = PostgresqlDatabase(host=config.host, user=config.user, password=config.password, database=config.database)
+db = MySQLDatabase(host=config.host, user=config.user, password=config.password, database=config.database)
 
 class BaseModel(Model):
     class Meta:

@@ -16,8 +16,9 @@ add_routes([
     ('/register/', user.register),
     ('/login/', user.login),
     ('/user/', user.user),
-    ('/api/submitSpeech/', user.new_text),
-    ('/api/refresh_quote/', user.refresh_quote),
+    ('/client/', user.display_client),
+    ('/api/v1/submit_speech/', user.new_text),
+    ('/api/v1/refresh_quote/', user.refresh_quote),
     ('/api/search/', user.search_text),
     ('/logout/', user.logout),
     ('/nodata/', user.nodata)

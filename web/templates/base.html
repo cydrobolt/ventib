@@ -1,23 +1,21 @@
 <html>
     <head>
         <title>Ventib</title>
-        <script src="/static/jquery/jquery.min.js"></script>
-        <script src="/static/materialize/js/materialize.min.js"></script>
-        <script src="/static/chart/Chart.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDUfH2rcZMI650GRtspHhpzmM5pVIYmkdw"></script>
-        <script src="/static/rgeocode.js"></script>
-        <link href="/static/materialize/css/materialize.min.css" rel="stylesheet" type="text/css" />
-        <link href="/static/app.css" rel="stylesheet" type="text/css" />
-        <script>
-        $(function () {
-            $("#search-loading").hide();
-        });
-        window.cache2 = [];
-
-        </script>
+        <link href="/static/css/materialize.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/css/app.css" rel="stylesheet" />
+        {% block css %}
+        {% endblock %}
     </head>
     <body>
         {% block body %}
+        {% endblock %}
+
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/Chart.min.js"></script>
+        <script src='/static/js/base.js'></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDUfH2rcZMI650GRtspHhpzmM5pVIYmkdw"></script>
+        <script src="/static/js/materialize.min.js"></script>
+        {% block js %}
         {% endblock %}
     </body>
 </html>
