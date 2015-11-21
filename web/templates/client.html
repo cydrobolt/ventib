@@ -1,14 +1,22 @@
 {% extends "navbar.html" %}
 
+{% set thispage = 'client' %}
+
+
 {% block extracss %}
 <link href="/static/css/wit-mic.css" rel="stylesheet" />
 
 {% endblock %}
 
 {% block content %}
-<h4>Ventib Client</h4>
+<h3>Ventib Client</h3>
 
-<p>Please allow Ventib to access your location and your microphone to continue.</p>
+<p id="allow-mic">Please allow Ventib to access your location and your microphone to continue.</p>
+<h6>To begin recording, press the microphone button. To stop recording, you will need to refresh the page.
+    Ventib will continiously record your speech in ten second fragments.
+</h6>
+<p>You must leave this tab open for Ventib to operate. Ensure your mic is close enough to
+the audio source in order for Ventib to work correctly.</p>
 
 <div id="microphone"></div>
 {% endblock %}

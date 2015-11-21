@@ -21,6 +21,7 @@ var mic = new Wit.Microphone(document.getElementById("microphone"));
 
 mic.onready = function () {
     console.info("Microphone is ready to record");
+    $('#allow-mic').remove();
 };
 mic.onaudiostart = function () {
     console.info("Recording started");

@@ -4,6 +4,7 @@
     ('Home', 'home', '/', True, 1),
     ('Register or Login', 'rlog', '/register_login/', True, 2),
     ('Dashboard', 'dashboard', '/user', True, 3),
+    ('Client', 'client', '/client', True, 3),
     ('Logout', 'logout', '/logout', True, 3)
 ] %}
 
@@ -16,7 +17,7 @@
     <div class="container">
         <div class="nav-wrapper">
             <a class="brand-logo" href="/">Ventib</a>
-            <ul id="nav-mobile" class="right side-nav">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% for link in links %}
                     {% if link[3] %}
                         {% if link[4] == 1 %}
