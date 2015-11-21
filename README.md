@@ -1,5 +1,7 @@
 # Ventib
 
+![Ventib](http://i.imgur.com/OWTJSUh.png)
+
 Ventib offers the capability of parsing your speech and generating valuable statistics based on environmental factors. It also provides a search function, allowing users to sift through their past speech.
 
 Ventib uses speech pattern analysis to provide statistics based on users’ real-time speech habits. Ventib analyses the content, location, and timing of your speech.
