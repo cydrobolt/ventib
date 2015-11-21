@@ -13,4 +13,5 @@ def authenticate_user(user, pwd):
     matching = list(User.select().where(User.username == user, User.password == hashed_pwd).execute())
     if len(matching) == 0:
         return False
+
     return matching[0]

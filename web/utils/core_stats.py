@@ -95,7 +95,7 @@ class CoreStats:
                 if j not in data:
                     data[j] = []
                 data[j].append(s[idx + 1])
-        print(data)
+        # print(data)
         start = random.choice(list(data.keys()))
         sentence = [start]
         while len(sentence) < 40:
